@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { motion, useMotionValue, useTransform, useSpring, useMotionTemplate, AnimatePresence, useAnimation } from "framer-motion"
 import { useState } from "react";
-const Wrapper = styled.div`
+import { Link } from "react-router-dom";
+export const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -11,8 +12,8 @@ const Wrapper = styled.div`
 `;
 
 export const Box = styled(motion.div)`
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   border-radius: 10px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
   background-color: #ffffff89;
@@ -25,8 +26,8 @@ const CircleBox = styled(Box)`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2,250px);
-  grid-template-rows: repeat(2,250px);
+  grid-template-columns: repeat(2,230px);
+  grid-template-rows: repeat(2,230px);
   grid-gap: 10px;
 `;
 
@@ -45,7 +46,7 @@ const overlay = {
   exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
 };
 
-const SwitchBtn = styled(motion.button)`
+export const SwitchBtn = styled(motion.button)`
   background-color: #ffffff;
   border-radius: 0.3rem;
   font-weight: 900;
@@ -74,22 +75,27 @@ const Home = () => {
   const [id, setId] = useState<null | string>(null);
   return (
     <Wrapper>
+      <SwitchBtn>
+        <Link to="slider">To Slider</Link>
+      </SwitchBtn>
       <Grid>
-        <Box style={{ justifySelf:"flex-end", alignSelf:"end" }} whileHover={{
-          width:"220px",
-          height:"220px",
+        <Box style={{ justifySelf: "flex-end", alignSelf: "end" }} whileHover={{
+          width: "220px",
+          height: "220px",
+          transformOrigin: "center right",
         }} onClick={() => setId("1")} key={"1"} layoutId={"1"} />
-        <CircleBox style={{ alignSelf:"end"}}>
+        <CircleBox style={{ alignSelf: "end" }}>
           <MovingCircle layoutId={"3"}></MovingCircle>
         </CircleBox>
-        <CircleBox style={{ justifySelf:"flex-end" }}>
+        <CircleBox style={{ justifySelf: "flex-end" }}>
           <AnimatePresence>
             {switchBtn ? <MovingCircle layoutId={"3"}></MovingCircle> : null}
           </AnimatePresence>
         </CircleBox>
         <Box whileHover={{
-          width:"220px",
-          height:"220px",
+          width: "220px",
+          height: "220px",
+          transformOrigin: "center  right",
         }} onClick={() => setId("2")} key={"2"} layoutId={"2"}></Box>
       </Grid>
       <SwitchBtn
